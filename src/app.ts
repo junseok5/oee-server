@@ -1,5 +1,6 @@
 import cors from "cors"
 import express, { Express } from "express"
+import graphqlHTTP from 'express-graphql'
 import helmet from "helmet"
 import logger from "morgan"
 
@@ -14,6 +15,13 @@ class App {
     this.app.use(cors())
     this.app.use(logger("dev"))
     this.app.use(helmet())
+    this.initiateGraphql()
+  }
+
+  private initiateGraphql = () => {
+    this.app.use("/graphql", graphqlHTTP({
+      
+    }))
   }
 }
 
