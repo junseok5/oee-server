@@ -6,6 +6,9 @@
   "repository": "https://github.com/junseok5/open-english-education-server",
   "author": "Junseok Oh",
   "license": "MIT",
+  "scripts": {
+    "dev": "cd src && cross-env NODE_PATH=src nodemon --exec ts-node index.ts -e ts"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "cross-env": "^5.2.0",
