@@ -30,6 +30,10 @@ const Video: Schema = new Schema({
         type: Number,
         default: 0
     },
+    subtitle: {
+        type: Schema.Types.ObjectId,
+        ref: "Subtitle"
+    },
     createdAt: {
         type: Date,
         default: Date.now()
