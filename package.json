@@ -1,38 +1,44 @@
 {
-  "name": "openenglisheducation-server",
-  "version": "1.0.0",
-  "description": "Open english education server.",
-  "main": "index.js",
-  "repository": "https://github.com/junseok5/open-english-education-server",
-  "author": "Junseok Oh",
-  "license": "MIT",
-  "scripts": {
-    "dev": "cd src && cross-env NODE_PATH=src nodemon --exec ts-node index.ts -e ts"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "cross-env": "^5.2.0",
-    "dotenv": "^8.0.0",
-    "express": "^4.17.1",
-    "express-graphql": "^0.8.0",
-    "fb": "^2.0.0",
-    "googleapis": "^40.0.0",
-    "graphql": "^14.3.1",
-    "graphql-tools": "^4.0.4",
-    "helmet": "^3.18.0",
-    "merge-graphql-schemas": "^1.5.8",
-    "mongoose": "^5.6.0",
-    "morgan": "^1.9.1"
-  },
-  "devDependencies": {
-    "@types/cors": "^2.8.5",
-    "@types/fb": "^0.0.23",
-    "@types/mongoose": "^5.5.6",
-    "@types/morgan": "^1.7.35",
-    "@types/node": "^12.0.8",
-    "ts-node": "^8.3.0",
-    "tslint-config-airbnb": "^5.11.1",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.5.2"
-  }
+    "name": "openenglisheducation-server",
+    "version": "1.0.0",
+    "description": "Open english education server.",
+    "main": "index.js",
+    "repository": "https://github.com/junseok5/open-english-education-server",
+    "author": "Junseok Oh",
+    "license": "MIT",
+    "scripts": {
+        "predev": "yarn run types",
+        "dev": "cd src && cross-env NODE_PATH=src nodemon --exec ts-node index.ts -e ts",
+        "pretypes": "gql-merge --out-file ./src/schema.graphql ./src/graphql/**/*.graphql",
+        "types": "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.ts"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "cross-env": "^5.2.0",
+        "dotenv": "^8.0.0",
+        "express": "^4.17.1",
+        "express-graphql": "^0.8.0",
+        "express-session": "^1.16.2",
+        "fb": "^2.0.0",
+        "googleapis": "^40.0.0",
+        "graphql": "^14.3.1",
+        "graphql-tools": "^4.0.4",
+        "helmet": "^3.18.0",
+        "merge-graphql-schemas": "^1.5.8",
+        "mongoose": "^5.6.0",
+        "morgan": "^1.9.1"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.5",
+        "@types/fb": "^0.0.23",
+        "@types/mongoose": "^5.5.6",
+        "@types/morgan": "^1.7.35",
+        "@types/node": "^12.0.8",
+        "gql-merge": "^0.0.6",
+        "graphql-to-typescript": "^0.1.2",
+        "ts-node": "^8.3.0",
+        "tslint-config-airbnb": "^5.11.1",
+        "tslint-config-prettier": "^1.18.0",
+        "typescript": "^3.5.2"
+    }
 }

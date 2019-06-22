@@ -1,0 +1,8 @@
+type AdminLoginResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  AdminLogin(password: String!): AdminLoginResponse
+}

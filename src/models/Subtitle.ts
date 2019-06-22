@@ -3,22 +3,24 @@ import { Document, model, Schema } from "mongoose"
 export interface ISubtitleContent {
     start: number
     end: number
-    textContent: string
+    text: string
 }
 
 export interface ISubtitleDoc extends Document {
     _id: Schema.Types.ObjectId
     youtubeId: string
-    en: ISubtitleContent[]
+    language: string
+    transcript: ISubtitleContent[]
 }
 
 const Subtitle: Schema = new Schema({
     youtubeId: String,
-    en: [
+    language: String,
+    transcript: [
         {
             start: Number,
             end: Number,
-            textContent: String
+            text: String
         }
     ]
 })
