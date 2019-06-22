@@ -5,5 +5,5 @@ const { PORT: port } = process.env
 const app = new App().app
 
 app.listen(port, () => {
-  console.log(`Listening graphql server on port ${port}`)
+    console.log(`Listening graphql server on port ${port}`)
 })

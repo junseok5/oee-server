@@ -1,28 +1,32 @@
 import cors from "cors"
 import express, { Express } from "express"
-import graphqlHTTP from 'express-graphql'
+import graphqlHTTP from "express-graphql"
 import helmet from "helmet"
 import logger from "morgan"
+import database from "./database"
 
 class App {
-  public app: Express = express()
+    public app: Express = express()
 
-  constructor() {
-    this.middlewares()
-  }
+    constructor() {
+        this.connectDB()
+        this.middlewares()
+        this.initiateGraphql()
+    }
 
-  private middlewares = () => {
-    this.app.use(cors())
-    this.app.use(logger("dev"))
-    this.app.use(helmet())
-    this.initiateGraphql()
-  }
+    private connectDB = (): void => {
+        database.connect()
+    }
 
-  private initiateGraphql = () => {
-    this.app.use("/graphql", graphqlHTTP({
-      
-    }))
-  }
+    private middlewares = () => {
+        this.app.use(cors())
+        this.app.use(logger("dev"))
+        this.app.use(helmet())
+    }
+
+    private initiateGraphql = () => {
+        this.app.use("/graphql", graphqlHTTP({}))
+    }
 }
 
 export default App
