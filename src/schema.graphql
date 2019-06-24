@@ -6,3 +6,39 @@ type AdminLoginResponse {
 type Mutation {
   AdminLogin(password: String!): AdminLoginResponse
 }
+
+type User {
+  _id: String!
+  email: String!
+  fbId: String
+  fbToken: String
+  googleId: String
+  googleToken: String
+  displayName: String!
+  thumbnail: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type GetVideoResponse {
+  ok: Boolean!
+  error: String
+  video: Video
+}
+
+type Query {
+  GetVideo: GetVideoResponse!
+}
+
+type Video {
+  _id: String!
+  youtubeId: String!
+  title: String!
+  overayTime: String!
+  tags: [String]
+  level: String!
+  private: Boolean!
+  views: Int!
+  createdAt: String!
+  updatedAt: String!
+}

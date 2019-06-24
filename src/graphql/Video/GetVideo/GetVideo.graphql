@@ -1,0 +1,9 @@
+type GetVideoResponse {
+    ok: Boolean!
+    error: String
+    video: Video
+}
+
+type Query {
+    GetVideo: GetVideoResponse!
+}

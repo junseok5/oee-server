@@ -5,6 +5,7 @@ import session from "express-session"
 import helmet from "helmet"
 import logger from "morgan"
 import database from "./database"
+import schema from "./schema"
 
 class App {
     public app: Express
@@ -36,7 +37,13 @@ class App {
     }
 
     private initiateGraphql = () => {
-        this.app.use("/graphql", graphqlHTTP({}))
+        this.app.use(
+            "/graphql",
+            graphqlHTTP({
+                schema,
+                graphiql: true
+            })
+        )
     }
 }
 

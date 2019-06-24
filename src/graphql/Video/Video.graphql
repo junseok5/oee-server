@@ -1,0 +1,12 @@
+type Video {
+    _id: String!
+    youtubeId: String!
+    title: String!
+    overayTime: String!
+    tags: [String]
+    level: String!
+    private: Boolean!
+    views: Int!
+    createdAt: String!
+    updatedAt: String!
+}
