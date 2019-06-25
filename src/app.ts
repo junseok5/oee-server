@@ -1,18 +1,25 @@
 import cors from "cors"
-import express, { Express } from "express"
-import graphqlHTTP from "express-graphql"
 import session from "express-session"
+import { GraphQLServer } from "graphql-yoga"
+import { ContextParameters } from "graphql-yoga/dist/types"
 import helmet from "helmet"
 import logger from "morgan"
 import database from "./database"
 import schema from "./schema"
 
 class App {
-    public app: Express
+    public app: GraphQLServer
     private sessionConfig
 
     constructor() {
-        this.app = express()
+        this.app = new GraphQLServer({
+            schema,
+            context: (req: ContextParameters) => {
+                return {
+                    req: req.request
+                }
+            }
+        })
         this.sessionConfig = {
             secret: process.env.SESSION_KEY,
             resave: false,
@@ -21,7 +28,6 @@ class App {
         }
         this.connectDB()
         this.middlewares()
-        this.initiateGraphql()
     }
 
     private connectDB = (): void => {
@@ -29,21 +35,11 @@ class App {
     }
 
     private middlewares = () => {
-        this.app.set("trust proxy", 1)
-        this.app.use(session(this.sessionConfig))
-        this.app.use(cors())
-        this.app.use(logger("dev"))
-        this.app.use(helmet())
-    }
-
-    private initiateGraphql = () => {
-        this.app.use(
-            "/graphql",
-            graphqlHTTP({
-                schema,
-                graphiql: true
-            })
-        )
+        this.app.express.set("trust proxy", 1)
+        this.app.express.use(session(this.sessionConfig))
+        this.app.express.use(cors())
+        this.app.express.use(logger("dev"))
+        this.app.express.use(helmet())
     }
 }
 

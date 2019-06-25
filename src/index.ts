@@ -1,9 +1,19 @@
+import { Options } from "graphql-yoga"
 import App from "./app"
 import "./env"
 
-const { PORT: port } = process.env
+// SET VARIABLE
+const PORT: number | string = process.env.PORT || 4000
+const PLAYGROUND_ENDPOINT: string = "/playground"
+const GRAPHQL_ENDPOINT: string = "/graphql"
 const app = new App().app
 
-app.listen(port, () => {
-    console.log(`Listening graphql server on port ${port}`)
+const options: Options = {
+    port: PORT,
+    playground: PLAYGROUND_ENDPOINT,
+    endpoint: GRAPHQL_ENDPOINT
+}
+
+app.start(options, () => {
+    console.log(`Listening on port ${PORT}`)
 })

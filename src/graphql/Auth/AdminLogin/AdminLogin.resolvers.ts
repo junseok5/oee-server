@@ -11,8 +11,8 @@ const resolvers: Resolvers = {
             args: AdminLoginMutationArgs,
             { req }
         ): Promise<AdminLoginResponse> => {
-            console.log('hey')
             const { password } = args
+            console.log(password, process.env.adminPassword)
 
             if (process.env.adminPassword === password) {
                 req.logged = true
