@@ -12,9 +12,8 @@ const resolvers: Resolvers = {
             { req }
         ): Promise<AdminLoginResponse> => {
             const { password } = args
-            console.log(password, process.env.adminPassword)
 
-            if (process.env.adminPassword === password) {
+            if (process.env.ADMIN_PASSWORD === password) {
                 req.logged = true
 
                 return {
