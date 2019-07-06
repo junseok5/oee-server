@@ -1,0 +1,22 @@
+type AddVideoResponse {
+    ok: Boolean!
+    error: String
+}
+
+input Script {
+    start: Float!
+    end: Float!
+    text: String!
+}
+
+type Mutation {
+    AddVideo(
+        youtubeId: String!
+        title: String!
+        overayTime: String!
+        tags: [String]
+        level: String!
+        private: Boolean!
+        subtitle: [Script]!
+    ): AddVideoResponse
+}

@@ -9,6 +9,13 @@ export interface IVideoDoc extends Document {
     level: string
     private: boolean
     views: number
+    subtitle: [
+        {
+            start: number
+            end: number
+            text: string
+        }
+    ]
     createdAt: Date
     updatedAt: Date
 }
@@ -30,10 +37,7 @@ const Video: Schema = new Schema({
         type: Number,
         default: 0
     },
-    subtitle: {
-        type: Schema.Types.ObjectId,
-        ref: "Subtitle"
-    },
+    subtitle: Array,
     createdAt: {
         type: Date,
         default: Date.now()

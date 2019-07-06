@@ -7,6 +7,7 @@ type Mutation {
   AdminLogin(password: String!): AdminLoginResponse
   AdminLogout: AdminLogoutResponse
   SocialLogin(provider: String!, accessToken: String!): SocialLoginResponse
+  AddVideo(youtubeId: String!, title: String!, overayTime: String!, tags: [String], level: String!, private: Boolean!, subtitle: [Script]!): AddVideoResponse
 }
 
 type AdminLogoutResponse {
@@ -31,6 +32,17 @@ type User {
   thumbnail: String!
   createdAt: String!
   updatedAt: String!
+}
+
+type AddVideoResponse {
+  ok: Boolean!
+  error: String
+}
+
+input Script {
+  start: Float!
+  end: Float!
+  text: String!
 }
 
 type GetVideoResponse {
