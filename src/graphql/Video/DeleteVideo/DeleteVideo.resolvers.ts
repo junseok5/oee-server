@@ -1,3 +1,4 @@
+import checkAdminAuth from "../../../middleware/checkAdminAuth"
 import Video from "../../../models/Video"
 import {
     DeleteVideoMutationArgs,
@@ -7,34 +8,29 @@ import { Resolvers } from "../../../types/resolvers"
 
 const resolvers: Resolvers = {
     Mutation: {
-        DeleteVideo: async (
-            _,
-            args: DeleteVideoMutationArgs,
-            { req }
-        ): Promise<DeleteVideoResponse> => {
-            // if (!req.session.logged) {
-            //     return {
-            //         ok: false,
-            //         error: "Authentication failed"
-            //     }
-            // }
+        DeleteVideo: checkAdminAuth(
+            async (
+                _,
+                args: DeleteVideoMutationArgs,
+                __
+            ): Promise<DeleteVideoResponse> => {
+                const { id } = args
 
-            const { id } = args
+                try {
+                    await Video.findByIdAndRemove(id)
 
-            try {
-                await Video.findByIdAndRemove(id)
-
-                return {
-                    ok: true,
-                    error: null
-                }
-            } catch (e) {
-                return {
-                    ok: false,
-                    error: e.message
+                    return {
+                        ok: true,
+                        error: null
+                    }
+                } catch (e) {
+                    return {
+                        ok: false,
+                        error: e.message
+                    }
                 }
             }
-        }
+        )
     }
 }
 

@@ -1,7 +1,7 @@
 import { Document, model, Model, Schema } from "mongoose"
 
 export interface IUserDoc extends Document {
-    _id: Schema.Types.ObjectId
+    _id: string
     email: string
     social: {
         facebook: {
@@ -15,8 +15,8 @@ export interface IUserDoc extends Document {
     }
     displayName: string
     thumbnail: string
-    createdAt: Date
-    updatedAt: Date
+    createdAt: string
+    updatedAt: string
 }
 
 export interface IUserModel extends Model<IUserDoc> {

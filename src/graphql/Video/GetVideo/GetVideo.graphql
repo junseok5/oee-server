@@ -5,5 +5,5 @@ type GetVideoResponse {
 }
 
 type Query {
-    GetVideo: GetVideoResponse!
+    GetVideo(id: String!): GetVideoResponse!
 }

@@ -1,7 +1,7 @@
 import { Document, model, Schema } from "mongoose"
 
 export interface IVideoDoc extends Document {
-    _id: Schema.Types.ObjectId
+    _id: string
     youtubeId: string
     title: string
     overayTime: string
@@ -16,8 +16,8 @@ export interface IVideoDoc extends Document {
             text: string
         }
     ]
-    createdAt: Date
-    updatedAt: Date
+    createdAt: string
+    updatedAt: string
 }
 
 const Video: Schema = new Schema({

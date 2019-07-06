@@ -1,10 +1,10 @@
 import { Document, model, Schema } from "mongoose"
 
 export interface IFavoriteVideoDoc extends Document {
-    _id: Schema.Types.ObjectId
+    _id: string
     user: Schema.Types.ObjectId
     video: Schema.Types.ObjectId
-    createdAt: Date
+    createdAt: string
 }
 
 const FavoriteVideo: Schema = new Schema({

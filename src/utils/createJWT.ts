@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken"
-import { Schema } from "mongoose"
 
-const createJWT = (id: Schema.Types.ObjectId) => {
+const createJWT = (id: string) => {
     const token = jwt.sign(
         {
             id
