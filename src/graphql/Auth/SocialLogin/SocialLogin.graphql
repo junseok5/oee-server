@@ -1,0 +1,9 @@
+type SocialLoginResponse {
+    ok: Boolean!
+    error: String
+    token: String
+}
+
+type Mutation {
+    SocialLogin(provider: String!, accessToken: String!): SocialLoginResponse
+}

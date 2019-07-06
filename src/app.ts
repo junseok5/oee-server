@@ -14,17 +14,15 @@ class App {
     constructor() {
         this.app = new GraphQLServer({
             schema,
-            context: (req: ContextParameters) => {
-                return {
-                    req: req.request
-                }
-            }
+            context: (req: ContextParameters) => ({
+                req: req.request
+            })
         })
         this.sessionConfig = {
             secret: process.env.SESSION_KEY,
             resave: false,
             saveUninitialized: true,
-            cookie: { secure: true, maxAge: 86400000 }
+            cookie: { secure: false, maxAge: 86400000 }
         }
         this.connectDB()
         this.middlewares()

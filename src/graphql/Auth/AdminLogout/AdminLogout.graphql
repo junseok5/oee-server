@@ -1,0 +1,8 @@
+type AdminLogoutResponse {
+    ok: Boolean!
+    error: String
+}
+
+type Mutation {
+    AdminLogout: AdminLogoutResponse
+}

@@ -5,6 +5,19 @@ type AdminLoginResponse {
 
 type Mutation {
   AdminLogin(password: String!): AdminLoginResponse
+  AdminLogout: AdminLogoutResponse
+  SocialLogin(provider: String!, accessToken: String!): SocialLoginResponse
+}
+
+type AdminLogoutResponse {
+  ok: Boolean!
+  error: String
+}
+
+type SocialLoginResponse {
+  ok: Boolean!
+  error: String
+  token: String
 }
 
 type User {

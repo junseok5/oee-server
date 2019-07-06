@@ -49,7 +49,7 @@ const getGoogleProfile = accessToken => {
     })
 }
 
-const getProfile = (provider, accessToken) => {
+const getSocialProfile = (provider, accessToken) => {
     const getters = {
         facebook: getFacebookProfile,
         google: getGoogleProfile
@@ -58,4 +58,4 @@ const getProfile = (provider, accessToken) => {
     return getters[provider](accessToken)
 }
 
-export default getProfile
+export default getSocialProfile
