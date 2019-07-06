@@ -18,7 +18,7 @@ const resolvers: Resolvers = {
                         overayTime,
                         tags,
                         level,
-                        private: isPrivate,
+                        isPublic,
                         subtitle
                     } = args
 
@@ -28,7 +28,7 @@ const resolvers: Resolvers = {
                         overayTime,
                         tags,
                         level,
-                        isPrivate,
+                        isPublic,
                         subtitle
                     })
 

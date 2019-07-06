@@ -5,7 +5,7 @@ type Video {
     overayTime: String!
     tags: [String]
     level: String!
-    private: Boolean!
+    isPublic: Boolean!
     views: Int!
     createdAt: String!
     updatedAt: String!

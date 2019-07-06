@@ -7,7 +7,7 @@ type Mutation {
   AdminLogin(password: String!): AdminLoginResponse
   AdminLogout: AdminLogoutResponse
   SocialLogin(provider: String!, accessToken: String!): SocialLoginResponse
-  AddVideo(youtubeId: String!, title: String!, overayTime: String!, tags: [String], level: String!, private: Boolean!, subtitle: [Script]!): AddVideoResponse
+  AddVideo(youtubeId: String!, title: String!, overayTime: String!, tags: [String], level: String!, isPublic: Boolean!, subtitle: [Script]!): AddVideoResponse
   DeleteVideo(id: String!): DeleteVideoResponse
   EditVideo(id: String!, patchData: VideoPatch!): EditVideoResponse
 }
@@ -62,7 +62,7 @@ input VideoPatch {
   overayTime: String
   tags: [String]
   level: String
-  private: Boolean
+  isPublic: Boolean
   subtitle: [Script]
 }
 
@@ -74,6 +74,13 @@ type GetVideoResponse {
 
 type Query {
   GetVideo(id: String!): GetVideoResponse!
+  GetVideoList(page: Int!, tag: String, keyword: String, level: String): GetVideoListResponse
+}
+
+type GetVideoListResponse {
+  ok: Boolean!
+  error: String
+  videos: [Video]
 }
 
 type Video {
@@ -83,7 +90,7 @@ type Video {
   overayTime: String!
   tags: [String]
   level: String!
-  private: Boolean!
+  isPublic: Boolean!
   views: Int!
   createdAt: String!
   updatedAt: String!

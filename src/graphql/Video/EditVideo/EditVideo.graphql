@@ -8,7 +8,7 @@ input VideoPatch {
     overayTime: String
     tags: [String]
     level: String
-    private: Boolean
+    isPublic: Boolean
     subtitle: [Script]
 }
 

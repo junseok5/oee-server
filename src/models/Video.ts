@@ -7,7 +7,7 @@ export interface IVideoDoc extends Document {
     overayTime: string
     tags: [string]
     level: string
-    private: boolean
+    isPublic: boolean
     views: number
     subtitle: [
         {
@@ -29,7 +29,7 @@ const Video: Schema = new Schema({
     overayTime: String,
     tags: [String],
     level: String,
-    private: {
+    isPublic: {
         type: Boolean,
         default: true
     },
@@ -47,5 +47,13 @@ const Video: Schema = new Schema({
         default: Date.now()
     }
 })
+
+Video.statics.findList = function(query, page) {
+    return this.find(query)
+        .sort({ score: "desc" })
+        .limit(20)
+        .skip((page - 1) * 20)
+        .lean()
+}
 
 export default model<IVideoDoc>("Video", Video)

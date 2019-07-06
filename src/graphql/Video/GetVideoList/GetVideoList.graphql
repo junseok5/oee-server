@@ -1,0 +1,14 @@
+type GetVideoListResponse {
+    ok: Boolean!
+    error: String
+    videos: [Video]
+}
+
+type Query {
+    GetVideoList(
+        page: Int!
+        tag: String
+        keyword: String
+        level: String
+    ): GetVideoListResponse
+}
