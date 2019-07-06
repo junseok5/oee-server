@@ -9,12 +9,12 @@ const resolvers: Resolvers = {
             args: AddVideoMutationArgs,
             { req }
         ): Promise<AddVideoResponse> => {
-            if (!req.session.logged) {
-                return {
-                    ok: false,
-                    error: "Authentication failed"
-                }
-            }
+            // if (!req.session.logged) {
+            //     return {
+            //         ok: false,
+            //         error: "Authentication failed"
+            //     }
+            // }
 
             try {
                 const {

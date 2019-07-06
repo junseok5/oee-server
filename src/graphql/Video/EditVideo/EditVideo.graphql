@@ -1,0 +1,17 @@
+type EditVideoResponse {
+    ok: Boolean!
+    error: String
+}
+
+input VideoPatch {
+    title: String
+    overayTime: String
+    tags: [String]
+    level: String
+    private: Boolean
+    subtitle: [Script]
+}
+
+type Mutation {
+    EditVideo(id: String!, patchData: VideoPatch!): EditVideoResponse
+}

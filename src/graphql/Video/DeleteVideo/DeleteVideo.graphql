@@ -1,0 +1,8 @@
+type DeleteVideoResponse {
+    ok: Boolean!
+    error: String
+}
+
+type Mutation {
+    DeleteVideo(id: String!): DeleteVideoResponse
+}

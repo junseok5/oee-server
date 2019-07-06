@@ -8,6 +8,8 @@ type Mutation {
   AdminLogout: AdminLogoutResponse
   SocialLogin(provider: String!, accessToken: String!): SocialLoginResponse
   AddVideo(youtubeId: String!, title: String!, overayTime: String!, tags: [String], level: String!, private: Boolean!, subtitle: [Script]!): AddVideoResponse
+  DeleteVideo(id: String!): DeleteVideoResponse
+  EditVideo(id: String!, patchData: VideoPatch!): EditVideoResponse
 }
 
 type AdminLogoutResponse {
@@ -43,6 +45,25 @@ input Script {
   start: Float!
   end: Float!
   text: String!
+}
+
+type DeleteVideoResponse {
+  ok: Boolean!
+  error: String
+}
+
+type EditVideoResponse {
+  ok: Boolean!
+  error: String
+}
+
+input VideoPatch {
+  title: String
+  overayTime: String
+  tags: [String]
+  level: String
+  private: Boolean
+  subtitle: [Script]
 }
 
 type GetVideoResponse {
