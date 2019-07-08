@@ -9,7 +9,7 @@ input VideoPatch {
     tags: [String]
     level: String
     isPublic: Boolean
-    subtitle: [Script]
+    transcript: [Script]
 }
 
 type Mutation {

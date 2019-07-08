@@ -1,5 +1,6 @@
 import checkAdminAuth from "../../../middleware/checkAdminAuth"
-import Video from "../../../models/Video"
+import Subtitle from "../../../models/Subtitle"
+import Video, { IVideoDoc } from "../../../models/Video"
 import {
     DeleteVideoMutationArgs,
     DeleteVideoResponse
@@ -16,17 +17,35 @@ const resolvers: Resolvers = {
             ): Promise<DeleteVideoResponse> => {
                 const { id } = args
 
+                let video: IVideoDoc | null = null
                 try {
-                    await Video.findByIdAndRemove(id)
-
-                    return {
-                        ok: true,
-                        error: null
-                    }
+                    video = await Video.findById(id)
                 } catch (e) {
                     return {
                         ok: false,
                         error: e.message
+                    }
+                }
+
+                if (video) {
+                    try {
+                        await Subtitle.findByIdAndRemove(video.subtitle)
+                        await video.remove()
+
+                        return {
+                            ok: true,
+                            error: null
+                        }
+                    } catch (e) {
+                        return {
+                            ok: false,
+                            error: e.message
+                        }
+                    }
+                } else {
+                    return {
+                        ok: false,
+                        error: "Not found video."
                     }
                 }
             }

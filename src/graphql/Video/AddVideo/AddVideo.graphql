@@ -17,6 +17,6 @@ type Mutation {
         tags: [String]
         level: String!
         isPublic: Boolean!
-        subtitle: [Script]!
+        transcript: [Script]!
     ): AddVideoResponse
 }

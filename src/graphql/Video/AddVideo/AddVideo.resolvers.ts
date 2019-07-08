@@ -1,4 +1,5 @@
 import checkAdminAuth from "../../../middleware/checkAdminAuth"
+import Subtitle, { ISubtitleDoc } from "../../../models/Subtitle"
 import Video from "../../../models/Video"
 import { AddVideoMutationArgs, AddVideoResponse } from "../../../types/graph"
 import { Resolvers } from "../../../types/resolvers"
@@ -19,8 +20,12 @@ const resolvers: Resolvers = {
                         tags,
                         level,
                         isPublic,
-                        subtitle
+                        transcript
                     } = args
+
+                    const subtitle: ISubtitleDoc = await new Subtitle({
+                        transcript
+                    }).save()
 
                     const video = new Video({
                         youtubeId,
@@ -29,7 +34,7 @@ const resolvers: Resolvers = {
                         tags,
                         level,
                         isPublic,
-                        subtitle
+                        subtitle: subtitle._id
                     })
 
                     await video.save()

@@ -7,7 +7,7 @@ type Mutation {
   AdminLogin(password: String!): AdminLoginResponse
   AdminLogout: AdminLogoutResponse
   SocialLogin(provider: String!, accessToken: String!): SocialLoginResponse
-  AddVideo(youtubeId: String!, title: String!, overayTime: String!, tags: [String], level: String!, isPublic: Boolean!, subtitle: [Script]!): AddVideoResponse
+  AddVideo(youtubeId: String!, title: String!, overayTime: String!, tags: [String], level: String!, isPublic: Boolean!, transcript: [Script]!): AddVideoResponse
   DeleteVideo(id: String!): DeleteVideoResponse
   EditVideo(id: String!, patchData: VideoPatch!): EditVideoResponse
 }
@@ -63,7 +63,7 @@ input VideoPatch {
   tags: [String]
   level: String
   isPublic: Boolean
-  subtitle: [Script]
+  transcript: [Script]
 }
 
 type GetVideoResponse {
