@@ -28,7 +28,7 @@ const resolvers: Resolvers = {
                 : keyword
                 ? {
                       ...query,
-                      name: {
+                      title: {
                           $regex: keyword,
                           $options: "i"
                       }
