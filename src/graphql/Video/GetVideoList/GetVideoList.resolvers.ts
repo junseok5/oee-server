@@ -1,3 +1,4 @@
+import Video, { IVideoDoc } from "../../../models/Video"
 import {
     GetVideoListQueryArgs,
     GetVideoListResponse
@@ -42,11 +43,13 @@ const resolvers: Resolvers = {
                   }
 
             try {
-                /*
-                    비디오 리스트를 조회시 자막데이터까지 디비단에서 같이 조회가 되어
-                    동시 트래픽이 많아졌을시 성능 문제가 발생 가능.
-                    비디오와 자막을 나눠야 한다.
-                */
+                const videos: IVideoDoc[] = Video.findList(query)
+
+                return {
+                    ok: true,
+                    error: null,
+                    videos
+                }
             } catch (e) {
                 return {
                     ok: false,

@@ -1,4 +1,5 @@
-import { Document, model, Schema } from "mongoose"
+import { Document, model, Model, Schema } from "mongoose"
+import { Subtitle } from "../types/graph"
 
 export interface IVideoDoc extends Document {
     _id: string
@@ -9,9 +10,13 @@ export interface IVideoDoc extends Document {
     level: string
     isPublic: boolean
     views: number
-    subtitle: string
+    subtitle: Subtitle
     createdAt: string
     updatedAt: string
+}
+
+export interface IVideoModel extends Model<IVideoDoc> {
+    findList: (object) => IVideoDoc[]
 }
 
 const Video: Schema = new Schema({
@@ -50,7 +55,12 @@ Video.statics.findList = function(query, page) {
         .sort({ score: "desc" })
         .limit(20)
         .skip((page - 1) * 20)
+        .populate({
+            path: "subtitle",
+            model: "Subtitle",
+            select: "transcript"
+        })
         .lean()
 }
 
-export default model<IVideoDoc>("Video", Video)
+export default model<IVideoDoc, IVideoModel>("Video", Video)

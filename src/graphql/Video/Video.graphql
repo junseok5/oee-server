@@ -1,3 +1,14 @@
+type ScriptType {
+    start: Float!
+    end: Float!
+    textContent: String!
+}
+
+type Subtitle {
+    _id: String!
+    transcript: [ScriptType]
+}
+
 type Video {
     _id: String!
     youtubeId: String!
@@ -7,6 +18,7 @@ type Video {
     level: String!
     isPublic: Boolean!
     views: Int!
+    subtitle: Subtitle!
     createdAt: String!
     updatedAt: String!
 }

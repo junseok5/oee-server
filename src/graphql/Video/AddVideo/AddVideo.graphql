@@ -6,7 +6,7 @@ type AddVideoResponse {
 input Script {
     start: Float!
     end: Float!
-    text: String!
+    textContent: String!
 }
 
 type Mutation {

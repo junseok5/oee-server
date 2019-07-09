@@ -12,7 +12,9 @@ const resolvers: Resolvers = {
             const { id } = args
 
             try {
-                const video: IVideoDoc | null = await Video.findById(id)
+                const video: IVideoDoc | null = await Video.findById(
+                    id
+                ).populate("subtitle")
 
                 if (!video) {
                     return {
