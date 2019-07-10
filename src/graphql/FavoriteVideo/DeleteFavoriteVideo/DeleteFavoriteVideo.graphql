@@ -1,0 +1,8 @@
+type DeleteFavoriteVideoResponse {
+    ok: Boolean!
+    error: String
+}
+
+type Mutation {
+    DeleteFavoriteVideo(id: String!): DeleteFavoriteVideoResponse
+}

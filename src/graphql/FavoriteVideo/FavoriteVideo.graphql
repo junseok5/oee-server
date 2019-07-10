@@ -1,0 +1,6 @@
+type FavoriteVideo {
+    _id: String!
+    user: String!
+    video: String!
+    createdAt: String!
+}

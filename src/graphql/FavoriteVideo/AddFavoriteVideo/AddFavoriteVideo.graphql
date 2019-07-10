@@ -1,0 +1,8 @@
+type AddFavoriteVideoResponse {
+    ok: Boolean!
+    error: String
+}
+
+type Mutation {
+    AddFavoriteVideo(videoId: String!): AddFavoriteVideoResponse
+}

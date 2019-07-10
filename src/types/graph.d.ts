@@ -1,9 +1,15 @@
-export const typeDefs = ["type AdminLoginResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Mutation {\n  AdminLogin(password: String!): AdminLoginResponse\n  AdminLogout: AdminLogoutResponse\n  SocialLogin(provider: String!, accessToken: String!): SocialLoginResponse\n  AddVideo(youtubeId: String!, title: String!, overayTime: String!, tags: [String], level: String!, isPublic: Boolean!, transcript: [Script]!): AddVideoResponse\n  DeleteVideo(id: String!): DeleteVideoResponse\n  EditVideo(id: String!, patchData: VideoPatch!): EditVideoResponse\n}\n\ntype AdminLogoutResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype SocialLoginResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype User {\n  _id: String!\n  email: String!\n  fbId: String\n  fbToken: String\n  googleId: String\n  googleToken: String\n  displayName: String!\n  thumbnail: String!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype AddVideoResponse {\n  ok: Boolean!\n  error: String\n}\n\ninput Script {\n  start: Float!\n  end: Float!\n  textContent: String!\n}\n\ntype DeleteVideoResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype EditVideoResponse {\n  ok: Boolean!\n  error: String\n}\n\ninput VideoPatch {\n  title: String\n  overayTime: String\n  tags: [String]\n  level: String\n  isPublic: Boolean\n  transcript: [Script]\n}\n\ntype GetVideoResponse {\n  ok: Boolean!\n  error: String\n  video: Video\n}\n\ntype Query {\n  GetVideo(id: String!): GetVideoResponse!\n  GetVideoList(page: Int!, tag: String, keyword: String, level: String): GetVideoListResponse\n}\n\ntype GetVideoListResponse {\n  ok: Boolean!\n  error: String\n  videos: [Video]\n}\n\ntype ScriptType {\n  start: Float!\n  end: Float!\n  textContent: String!\n}\n\ntype Subtitle {\n  _id: String!\n  transcript: [ScriptType]\n}\n\ntype Video {\n  _id: String!\n  youtubeId: String!\n  title: String!\n  overayTime: String!\n  tags: [String]\n  level: String!\n  isPublic: Boolean!\n  views: Int!\n  subtitle: Subtitle!\n  createdAt: String!\n  updatedAt: String!\n}\n"];
+export const typeDefs = ["type AdminLoginResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Mutation {\n  AdminLogin(password: String!): AdminLoginResponse\n  AdminLogout: AdminLogoutResponse\n  SocialLogin(provider: String!, accessToken: String!): SocialLoginResponse\n  AddFavoriteVideo(videoId: String!): AddFavoriteVideoResponse\n  DeleteFavoriteVideo(id: String!): DeleteFavoriteVideoResponse\n  AddVideo(youtubeId: String!, title: String!, overayTime: String!, tags: [String], level: String!, isPublic: Boolean!, transcript: [Script]!): AddVideoResponse\n  DeleteVideo(id: String!): DeleteVideoResponse\n  EditVideo(id: String!, patchData: VideoPatch!): EditVideoResponse\n}\n\ntype AdminLogoutResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype SocialLoginResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype User {\n  _id: String!\n  email: String!\n  fbId: String\n  fbToken: String\n  googleId: String\n  googleToken: String\n  displayName: String!\n  thumbnail: String!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype AddFavoriteVideoResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype DeleteFavoriteVideoResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype FavoriteVideo {\n  _id: String!\n  user: String!\n  video: String!\n  createdAt: String!\n}\n\ntype GetFavoriteVideoListResponse {\n  ok: Boolean!\n  error: String\n  videos: [FavoriteVideo]\n}\n\ntype Query {\n  GetFavoriteVideoList(page: Int!, num: Int!): GetFavoriteVideoListResponse\n  GetVideo(id: String!): GetVideoResponse!\n  GetVideoList(page: Int!, tag: String, keyword: String, level: String): GetVideoListResponse\n}\n\ntype AddVideoResponse {\n  ok: Boolean!\n  error: String\n}\n\ninput Script {\n  start: Float!\n  end: Float!\n  textContent: String!\n}\n\ntype DeleteVideoResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype EditVideoResponse {\n  ok: Boolean!\n  error: String\n}\n\ninput VideoPatch {\n  title: String\n  overayTime: String\n  tags: [String]\n  level: String\n  isPublic: Boolean\n  transcript: [Script]\n}\n\ntype GetVideoResponse {\n  ok: Boolean!\n  error: String\n  video: Video\n}\n\ntype GetVideoListResponse {\n  ok: Boolean!\n  error: String\n  videos: [Video]\n}\n\ntype ScriptType {\n  start: Float!\n  end: Float!\n  textContent: String!\n}\n\ntype Subtitle {\n  _id: String!\n  transcript: [ScriptType]\n}\n\ntype Video {\n  _id: String!\n  youtubeId: String!\n  title: String!\n  overayTime: String!\n  tags: [String]\n  level: String!\n  isPublic: Boolean!\n  views: Int!\n  subtitle: Subtitle!\n  createdAt: String!\n  updatedAt: String!\n}\n"];
 /* tslint:disable */
 
 export interface Query {
+  GetFavoriteVideoList: GetFavoriteVideoListResponse | null;
   GetVideo: GetVideoResponse;
   GetVideoList: GetVideoListResponse | null;
+}
+
+export interface GetFavoriteVideoListQueryArgs {
+  page: number;
+  num: number;
 }
 
 export interface GetVideoQueryArgs {
@@ -15,6 +21,19 @@ export interface GetVideoListQueryArgs {
   tag: string | null;
   keyword: string | null;
   level: string | null;
+}
+
+export interface GetFavoriteVideoListResponse {
+  ok: boolean;
+  error: string | null;
+  videos: Array<FavoriteVideo> | null;
+}
+
+export interface FavoriteVideo {
+  _id: string;
+  user: string;
+  video: string;
+  createdAt: string;
 }
 
 export interface GetVideoResponse {
@@ -58,6 +77,8 @@ export interface Mutation {
   AdminLogin: AdminLoginResponse | null;
   AdminLogout: AdminLogoutResponse | null;
   SocialLogin: SocialLoginResponse | null;
+  AddFavoriteVideo: AddFavoriteVideoResponse | null;
+  DeleteFavoriteVideo: DeleteFavoriteVideoResponse | null;
   AddVideo: AddVideoResponse | null;
   DeleteVideo: DeleteVideoResponse | null;
   EditVideo: EditVideoResponse | null;
@@ -70,6 +91,14 @@ export interface AdminLoginMutationArgs {
 export interface SocialLoginMutationArgs {
   provider: string;
   accessToken: string;
+}
+
+export interface AddFavoriteVideoMutationArgs {
+  videoId: string;
+}
+
+export interface DeleteFavoriteVideoMutationArgs {
+  id: string;
 }
 
 export interface AddVideoMutationArgs {
@@ -105,6 +134,16 @@ export interface SocialLoginResponse {
   ok: boolean;
   error: string | null;
   token: string | null;
+}
+
+export interface AddFavoriteVideoResponse {
+  ok: boolean;
+  error: string | null;
+}
+
+export interface DeleteFavoriteVideoResponse {
+  ok: boolean;
+  error: string | null;
 }
 
 export interface Script {

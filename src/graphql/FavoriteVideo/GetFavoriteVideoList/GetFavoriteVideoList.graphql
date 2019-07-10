@@ -1,0 +1,9 @@
+type GetFavoriteVideoListResponse {
+    ok: Boolean!
+    error: String
+    videos: [FavoriteVideo]
+}
+
+type Query {
+    GetFavoriteVideoList(page: Int!, num: Int!): GetFavoriteVideoListResponse
+}

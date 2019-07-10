@@ -7,6 +7,8 @@ type Mutation {
   AdminLogin(password: String!): AdminLoginResponse
   AdminLogout: AdminLogoutResponse
   SocialLogin(provider: String!, accessToken: String!): SocialLoginResponse
+  AddFavoriteVideo(videoId: String!): AddFavoriteVideoResponse
+  DeleteFavoriteVideo(id: String!): DeleteFavoriteVideoResponse
   AddVideo(youtubeId: String!, title: String!, overayTime: String!, tags: [String], level: String!, isPublic: Boolean!, transcript: [Script]!): AddVideoResponse
   DeleteVideo(id: String!): DeleteVideoResponse
   EditVideo(id: String!, patchData: VideoPatch!): EditVideoResponse
@@ -34,6 +36,35 @@ type User {
   thumbnail: String!
   createdAt: String!
   updatedAt: String!
+}
+
+type AddFavoriteVideoResponse {
+  ok: Boolean!
+  error: String
+}
+
+type DeleteFavoriteVideoResponse {
+  ok: Boolean!
+  error: String
+}
+
+type FavoriteVideo {
+  _id: String!
+  user: String!
+  video: String!
+  createdAt: String!
+}
+
+type GetFavoriteVideoListResponse {
+  ok: Boolean!
+  error: String
+  videos: [FavoriteVideo]
+}
+
+type Query {
+  GetFavoriteVideoList(page: Int!, num: Int!): GetFavoriteVideoListResponse
+  GetVideo(id: String!): GetVideoResponse!
+  GetVideoList(page: Int!, tag: String, keyword: String, level: String): GetVideoListResponse
 }
 
 type AddVideoResponse {
@@ -70,11 +101,6 @@ type GetVideoResponse {
   ok: Boolean!
   error: String
   video: Video
-}
-
-type Query {
-  GetVideo(id: String!): GetVideoResponse!
-  GetVideoList(page: Int!, tag: String, keyword: String, level: String): GetVideoListResponse
 }
 
 type GetVideoListResponse {
