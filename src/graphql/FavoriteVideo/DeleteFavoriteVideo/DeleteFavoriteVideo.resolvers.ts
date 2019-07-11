@@ -1,4 +1,5 @@
 import { Types } from "mongoose"
+import checkUserAuth from "../../../middleware/checkUserAuth"
 import FavoriteVideo, { IFavoriteVideoDoc } from "../../../models/FavoriteVideo"
 import {
     DeleteFavoriteVideoMutationArgs,

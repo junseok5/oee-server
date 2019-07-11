@@ -1,3 +1,4 @@
+import checkUserAuth from "../../../middleware/checkUserAuth"
 import FavoriteVideo from "../../../models/FavoriteVideo"
 import {
     AddFavoriteVideoMutationArgs,

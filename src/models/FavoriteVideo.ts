@@ -40,4 +40,7 @@ FavoriteVideo.statics.findList = function(userId, page, num) {
         .lean()
 }
 
-export default model<IFavoriteVideoDoc>("FavoriteVideo", FavoriteVideo)
+export default model<IFavoriteVideoDoc, IFavoriteVideoModel>(
+    "FavoriteVideo",
+    FavoriteVideo
+)

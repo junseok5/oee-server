@@ -10,3 +10,5 @@ const checkUserAuth = resolverFunc => async (parent, args, context, info) => {
 
     return resolved
 }
+
+export default checkUserAuth

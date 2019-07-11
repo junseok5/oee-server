@@ -5,6 +5,7 @@ import { ContextParameters } from "graphql-yoga/dist/types"
 import helmet from "helmet"
 import logger from "morgan"
 import database from "./database"
+import checkJWT from "./middleware/checkJWT"
 import schema from "./schema"
 
 class App {
@@ -38,6 +39,7 @@ class App {
         this.app.express.use(cors())
         this.app.express.use(logger("dev"))
         this.app.express.use(helmet())
+        this.app.express.use(checkJWT)
     }
 }
 
