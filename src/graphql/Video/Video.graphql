@@ -18,7 +18,7 @@ type Video {
     level: String!
     isPublic: Boolean!
     views: Int!
-    subtitle: Subtitle!
+    subtitle: String!
     createdAt: String!
     updatedAt: String!
 }

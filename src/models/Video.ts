@@ -1,16 +1,15 @@
 import { Document, model, Model, Schema } from "mongoose"
-import { Subtitle } from "../types/graph"
 
 export interface IVideoDoc extends Document {
     _id: string
     youtubeId: string
     title: string
     overayTime: string
-    tags: [string]
+    tags: string[] | null
     level: string
     isPublic: boolean
     views: number
-    subtitle: Subtitle
+    subtitle: string
     createdAt: string
     updatedAt: string
 }
