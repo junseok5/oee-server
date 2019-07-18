@@ -1,0 +1,8 @@
+type AdminCheckResponse {
+    ok: Boolean!
+    error: String
+}
+
+type Query {
+    AdminCheck: AdminCheckResponse
+}
