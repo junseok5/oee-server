@@ -23,20 +23,21 @@ class App {
             secret: process.env.SESSION_KEY,
             resave: false,
             saveUninitialized: true,
-            cookie: { secure: false, maxAge: 86400000 }
+            cookie: { secure: false, maxAge: 86400000 },
+            httpOnly: false
         }
         this.connectDB()
-        this.middlewares()
+        this.runMiddlewares()
     }
 
     private connectDB = (): void => {
         database.connect()
     }
 
-    private middlewares = () => {
-        this.app.express.set("trust proxy", 1)
+    private runMiddlewares = () => {
+        this.app.express.set("trust proxy", true)
         this.app.express.use(session(this.sessionConfig))
-        this.app.express.use(cors())
+        this.app.express.use(cors({ origin: true, credentials: true }))
         this.app.express.use(logger("dev"))
         this.app.express.use(helmet())
         this.app.express.use(checkJWT)

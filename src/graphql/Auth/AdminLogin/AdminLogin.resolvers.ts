@@ -15,6 +15,8 @@ const resolvers: Resolvers = {
 
             if (process.env.ADMIN_PASSWORD === password) {
                 req.session.logged = true
+                req.session.save()
+                console.log(req.session)
 
                 return {
                     ok: true,
