@@ -113,6 +113,7 @@ type GetVideoListResponse {
   ok: Boolean!
   error: String
   videos: [Video]
+  count: Int!
 }
 
 type ScriptType {

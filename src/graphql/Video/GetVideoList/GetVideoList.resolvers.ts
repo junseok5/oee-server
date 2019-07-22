@@ -7,18 +7,19 @@ import { Resolvers } from "../../../types/resolvers"
 
 const resolvers: Resolvers = {
     Query: {
-        GetVideoList: (
+        GetVideoList: async (
             _,
             args: GetVideoListQueryArgs,
             __
-        ): Promise<GetVideoListResponse> | GetVideoListResponse => {
+        ): Promise<GetVideoListResponse> => {
             const { page = 1, tag, keyword, level } = args
 
             if (page < 1) {
                 return {
                     ok: false,
                     error: "Page must have more than 1",
-                    videos: null
+                    videos: null,
+                    count: 0
                 }
             }
 
@@ -43,18 +44,21 @@ const resolvers: Resolvers = {
                   }
 
             try {
-                const videos: IVideoDoc[] = Video.findList(query)
+                const videos: IVideoDoc[] = await Video.findList(query)
+                const count: number = await Video.countDocuments(query)
 
                 return {
                     ok: true,
                     error: null,
-                    videos
+                    videos,
+                    count
                 }
             } catch (e) {
                 return {
                     ok: false,
                     error: e.message,
-                    videos: null
+                    videos: null,
+                    count: 0
                 }
             }
         }
