@@ -15,7 +15,7 @@ export interface IVideoDoc extends Document {
 }
 
 export interface IVideoModel extends Model<IVideoDoc> {
-    findList: (object) => IVideoDoc[]
+    findList: (object, page: number) => IVideoDoc[]
 }
 
 const Video: Schema = new Schema({

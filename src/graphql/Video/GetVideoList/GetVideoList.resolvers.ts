@@ -13,13 +13,14 @@ const resolvers: Resolvers = {
             __
         ): Promise<GetVideoListResponse> => {
             const { page = 1, tag, keyword, level } = args
+            console.log(page)
 
             if (page < 1) {
                 return {
                     ok: false,
                     error: "Page must have more than 1",
                     videos: null,
-                    count: 0
+                    pageCount: 0
                 }
             }
 
@@ -44,21 +45,21 @@ const resolvers: Resolvers = {
                   }
 
             try {
-                const videos: IVideoDoc[] = await Video.findList(query)
+                const videos: IVideoDoc[] = await Video.findList(query, page)
                 const count: number = await Video.countDocuments(query)
 
                 return {
                     ok: true,
                     error: null,
                     videos,
-                    count
+                    pageCount: Math.floor(count / 20)
                 }
             } catch (e) {
                 return {
                     ok: false,
                     error: e.message,
                     videos: null,
-                    count: 0
+                    pageCount: 0
                 }
             }
         }
