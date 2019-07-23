@@ -21,12 +21,16 @@ const resolvers: Resolvers = {
                         ok: false,
                         error: "Video not found.",
                         video: null
+                        // subtitle: null
                     }
                 } else {
+                    // const subtitle = video.subtitle
+                    // video.subtitle = "subtitle"
                     return {
                         ok: true,
                         error: null,
                         video
+                        // subtitle
                     }
                 }
             } catch (e) {
@@ -34,6 +38,7 @@ const resolvers: Resolvers = {
                     ok: false,
                     error: e.message,
                     video: null
+                    // subtitle: null
                 }
             }
         }

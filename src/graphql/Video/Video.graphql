@@ -9,6 +9,12 @@ type Subtitle {
     transcript: [ScriptType]
 }
 
+type StringBox {
+    value: String
+}
+
+union SubtitleField = StringBox | Subtitle
+
 type Video {
     _id: String!
     youtubeId: String!
@@ -18,7 +24,7 @@ type Video {
     level: String!
     isPublic: Boolean!
     views: Int!
-    subtitle: String!
+    subtitle: Subtitle!
     createdAt: String!
     updatedAt: String!
 }

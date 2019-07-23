@@ -1,6 +1,6 @@
 import checkAdminAuth from "../../../middleware/checkAdminAuth"
 import Subtitle, { ISubtitleDoc } from "../../../models/Subtitle"
-import Video from "../../../models/Video"
+import Video, { IVideoDoc } from "../../../models/Video"
 import { AddVideoMutationArgs, AddVideoResponse } from "../../../types/graph"
 import { Resolvers } from "../../../types/resolvers"
 
@@ -23,21 +23,30 @@ const resolvers: Resolvers = {
                         transcript
                     } = args
 
+                    const video: IVideoDoc | null = await Video.findOne({
+                        youtubeId
+                    })
+
+                    if (video) {
+                        return {
+                            ok: false,
+                            error: "Video already exist."
+                        }
+                    }
+
                     const subtitle: ISubtitleDoc = await new Subtitle({
                         transcript
                     }).save()
 
-                    const video = new Video({
+                    await new Video({
                         youtubeId,
                         title,
                         overayTime,
                         tags,
                         level,
                         isPublic,
-                        subtitle: subtitle._id
-                    })
-
-                    await video.save()
+                        subtitle
+                    }).save()
 
                     return {
                         ok: true,

@@ -1,4 +1,5 @@
 import { Document, model, Model, Schema } from "mongoose"
+import { ISubtitleDoc } from "./Subtitle";
 
 export interface IVideoDoc extends Document {
     _id: string
@@ -9,7 +10,7 @@ export interface IVideoDoc extends Document {
     level: string
     isPublic: boolean
     views: number
-    subtitle: string
+    subtitle: ISubtitleDoc
     createdAt: string
     updatedAt: string
 }
