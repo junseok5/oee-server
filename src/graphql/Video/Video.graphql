@@ -9,12 +9,6 @@ type Subtitle {
     transcript: [ScriptType]
 }
 
-type StringBox {
-    value: String
-}
-
-union SubtitleField = StringBox | Subtitle
-
 type Video {
     _id: String!
     youtubeId: String!

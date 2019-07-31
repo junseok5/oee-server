@@ -2,19 +2,22 @@ import fb from "fb"
 import { google } from "googleapis"
 
 const getFacebookProfile = accessToken => {
-    return fb.api(
-        "me",
-        {
-            fields: ["name", "email", "picture"],
-            access_token: accessToken
-        },
-        res => ({
-            id: res.id,
-            name: res.name,
-            email: res.email || null,
-            thumbnail: res.picture.data.url
-        })
-    )
+    return new Promise((resolve, reject) => {
+        fb.api(
+            "me",
+            {
+                fields: ["name", "email", "picture"],
+                access_token: accessToken
+            },
+            res =>
+                resolve({
+                    id: res.id,
+                    name: res.name,
+                    email: res.email || null,
+                    thumbnail: res.picture.data.url
+                })
+        )
+    })
 }
 
 const getGoogleProfile = accessToken => {
