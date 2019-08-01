@@ -1,0 +1,9 @@
+type CheckLoginResponse {
+    ok: Boolean!
+    error: String
+    user: User
+}
+
+type Query {
+    CheckLogin: CheckLoginResponse
+}

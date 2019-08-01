@@ -25,14 +25,16 @@ const resolvers: Resolvers = {
                     return {
                         ok: false,
                         error: "Cannot find social profile.",
-                        token: null
+                        token: null,
+                        user: null
                     }
                 }
             } catch (e) {
                 return {
                     ok: false,
                     error: e.message,
-                    token: null
+                    token: null,
+                    user: null
                 }
             }
 
@@ -44,7 +46,8 @@ const resolvers: Resolvers = {
                 return {
                     ok: false,
                     error: e.message,
-                    token: null
+                    token: null,
+                    user: null
                 }
             }
 
@@ -55,13 +58,15 @@ const resolvers: Resolvers = {
                     return {
                         ok: true,
                         error: null,
-                        token
+                        token,
+                        user
                     }
                 } catch (e) {
                     return {
                         ok: false,
                         error: e.message,
-                        token: null
+                        token: null,
+                        user: null
                     }
                 }
             }
@@ -75,7 +80,8 @@ const resolvers: Resolvers = {
                     return {
                         ok: false,
                         error: e.message,
-                        token: null
+                        token: null,
+                        user: null
                     }
                 }
 
@@ -91,7 +97,8 @@ const resolvers: Resolvers = {
                         return {
                             ok: false,
                             error: e.message,
-                            token: null
+                            token: null,
+                            user: null
                         }
                     }
 
@@ -101,13 +108,15 @@ const resolvers: Resolvers = {
                         return {
                             ok: true,
                             error: null,
-                            token
+                            token,
+                            user: duplicated
                         }
                     } catch (e) {
                         return {
                             ok: false,
                             error: e.message,
-                            token: null
+                            token: null,
+                            user: null
                         }
                     }
                 } else {
@@ -128,20 +137,23 @@ const resolvers: Resolvers = {
                             return {
                                 ok: true,
                                 error: null,
-                                token
+                                token,
+                                user
                             }
                         } else {
                             return {
                                 ok: false,
                                 error: "New user save failed.",
-                                token: null
+                                token: null,
+                                user: null
                             }
                         }
                     } catch (e) {
                         return {
                             ok: false,
                             error: e.message,
-                            token: null
+                            token: null,
+                            user: null
                         }
                     }
                 }
@@ -150,7 +162,8 @@ const resolvers: Resolvers = {
             return {
                 ok: false,
                 error: "Sorry. Unknown server error.",
-                token: null
+                token: null,
+                user: null
             }
         }
     }

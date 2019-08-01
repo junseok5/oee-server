@@ -1,10 +1,17 @@
+type SocialFields {
+    id: String
+    accessToken: String
+}
+
+type Social {
+    facebook: SocialFields
+    google: SocialFields
+}
+
 type User {
     _id: String!
     email: String!
-    fbId: String
-    fbToken: String
-    googleId: String
-    googleToken: String
+    social: Social
     displayName: String!
     thumbnail: String!
     createdAt: String!

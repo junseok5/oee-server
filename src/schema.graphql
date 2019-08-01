@@ -5,6 +5,7 @@ type AdminCheckResponse {
 
 type Query {
   AdminCheck: AdminCheckResponse
+  CheckLogin: CheckLoginResponse
   GetFavoriteVideoList(page: Int!, num: Int!): GetFavoriteVideoListResponse
   GetVideo(id: String!): GetVideoResponse!
   GetVideoList(page: Int!, tag: String, keyword: String, level: String): GetVideoListResponse
@@ -31,19 +32,33 @@ type AdminLogoutResponse {
   error: String
 }
 
+type CheckLoginResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
 type SocialLoginResponse {
   ok: Boolean!
   error: String
   token: String
+  user: User
+}
+
+type SocialFields {
+  id: String
+  accessToken: String
+}
+
+type Social {
+  facebook: SocialFields
+  google: SocialFields
 }
 
 type User {
   _id: String!
   email: String!
-  fbId: String
-  fbToken: String
-  googleId: String
-  googleToken: String
+  social: Social
   displayName: String!
   thumbnail: String!
   createdAt: String!

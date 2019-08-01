@@ -2,6 +2,7 @@ type SocialLoginResponse {
     ok: Boolean!
     error: String
     token: String
+    user: User
 }
 
 type Mutation {

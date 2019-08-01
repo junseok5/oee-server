@@ -13,7 +13,6 @@ const resolvers: Resolvers = {
             __
         ): Promise<GetVideoListResponse> => {
             const { page = 1, tag, keyword, level } = args
-            console.log(page)
 
             if (page < 1) {
                 return {
